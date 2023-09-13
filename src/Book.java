@@ -1,3 +1,17 @@
+//Atribute
+//Title
+//Author
+//ISBNCode
+//totalNumberOfCopies
+//borrowedNumberOfCopies
+//Metode
+//Doar getteri si setteri
+//Creeaza clasa Library
+//
+//Atribute
+//booksList - o lista cu cartile din biblioteca
+
+
 public class Book {
     private String title;
     private String autor;

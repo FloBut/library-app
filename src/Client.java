@@ -1,14 +1,28 @@
 import java.util.Arrays;
-
+//Creeaza clasa Client, care extinde User
+//
+//Atribute
+//borrowedBooksCodes - lista ISBNCode-urilor cartilor imprumutate de client
+//Metode
+//isBookAvailable() - Va cauta o carte in biblioteca dupa ISBNCode si va afisa daca este sau nu disponibila pentru imprumut
+//viewAvailableBooks() - va afisa in consola toate cartile disponibile din biblioteca (adica cartile care au
+// borrowedNumberOfBooks mai mic de cat totalNumberOfBooks)
+//borrowBook() - va imprumuta o carte din biblioteca dupa ISBNCode, ceea ceva avea doua efecte:
+// Codul cartii imprumutate va fi adaugat in lista de coduri a clientului si In acelasi timp,
+// cartii cu acelasi ISBNCode din lista de carti din librarie ii va fi incrementat atributul borrowedNumberOfCopies cu 1.
+// Atentie! Operatia de imprumutare nu va fi posibila pentru o carte daca borrowedNumberOfCopies este egal cu totalNumberOfCopies
+//returnBook() - va returna o carte in biblioteca dupa ISBNCode, ceea ce va avea doua efecte:
+// Codul ISBNCode va disparea din lista de coduri ale clientului si In acelasi timp, cartii cu acel ISBNCode din lista de carti a bibliotecii ii va fi decrementat atributul borrowedNumberOfCopies cu 1. Atentie: toate metodele vor trebui sa primeasca ca parametru in plus o biblioteca
 
 
 public class Client extends User {
-    private String[] borrowedBooksCode;
+    private  String[] borrowedBooksCode;
     int noBorrowBooks;
 
-    public Client(String name) {
+    public Client(String name, String[] borrowedBooksCode, int noBorrowBooks) {
         super(name);
-        noBorrowBooks = 0;
+        this.borrowedBooksCode = borrowedBooksCode;
+        this.noBorrowBooks = 0;
     }
 
     //isBookAvailable() - Va cauta o carte in biblioteca dupa ISBNCode si va afisa daca este sau nu disponibila pentru imprumut
@@ -25,7 +39,7 @@ public class Client extends User {
     // viewAvailableBooks() - va afisa in consola toate cartile disponibile din biblioteca (adica cartile
     //// care au borrowedNumberOfBooks mai mic decat totalNumberOfBooks)
 
-    public void viewAvailableBooks(Library library) {
+    public void viewAvailableBooks(Library library) {//aici pot returna lista de carti disponibila si sa ma folosesc in met borrowbook
         for (int i = 0; i < library.getBooks().length; i++) {
             if (library.getBooks()[i].getTotalNumberOfCopies() > library.getBooks()[i].getBorrowedNumberOfCopies()) {
                 System.out.println(library.getBooks()[i]);
@@ -80,7 +94,7 @@ public class Client extends User {
                         noBorrowBooks--;
                     }
                 }
-                //cum fac sa scad numarul de copii de cart imprumutate??
+                //cum fac sa scad numarul de copii de carti imprumutate??
                 //library.setBooks(library.getBooks()[i].getBorrowedNumberOfCopies()-1);
                 flag = 1;
             }

@@ -1,3 +1,7 @@
+//Creeaza clasa Library
+//
+//Atribute
+//booksList - o lista cu cartile din biblioteca
 public class Library {
     private Book[] books;
 

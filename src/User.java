@@ -1,3 +1,7 @@
+//Creeaza clasa User, care va reprezenta un utilizator al aplicatiei de gestiune
+//
+//Atribute
+//Nume
 public class User {
     private String name;
 
