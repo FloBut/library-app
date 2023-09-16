@@ -17,33 +17,41 @@ import java.util.Arrays;
 
 public class Client extends User {
     private  String[] borrowedBooksCode;
-    int noBorrowBooks;
+    int noOfBorrowedBooks;
 
-    public Client(String name, String[] borrowedBooksCode, int noBorrowBooks) {
-        super(name);
+    public Client(String name, Library library) {
+        super(name, library);
+        this.borrowedBooksCode = new String[10];
+        this.noOfBorrowedBooks = 0;
+    }
+
+    public String[] getBorrowedBooksCode() {
+        return borrowedBooksCode;
+    }
+
+    public void setBorrowedBooksCode(String[] borrowedBooksCode) {
         this.borrowedBooksCode = borrowedBooksCode;
-        this.noBorrowBooks = 0;
+    }
+
+    public int getNoOfBorrowedBooks() {
+        return noOfBorrowedBooks;
+    }
+
+    public void setNoOfBorrowedBooks(int noOfBorrowedBooks) {
+        this.noOfBorrowedBooks = noOfBorrowedBooks;
     }
 
     //isBookAvailable() - Va cauta o carte in biblioteca dupa ISBNCode si va afisa daca este sau nu disponibila pentru imprumut
-    public boolean isBookAvailable(Library library, String ISBNCode) {
-        //parcurg lista de carti a bibliotecii si verific daca codul ISBN primit ca parametru
-        // nu se gaseste in lista de coduri din librarie atunci returnez false
-        for (int i = 0; i < library.getBooks().length; i++) {
-            if (!(ISBNCode.equals(library.getBooks()[i].getISBNCode()))) {//accesez fiecare cod ISBN corespunzator fiecarei carti din biblioteca
-                return false;
-            }
-        }
-       return true;
-    }
+    public boolean isBookAvailable(String ISBNCode) throws Exception {
     // viewAvailableBooks() - va afisa in consola toate cartile disponibile din biblioteca (adica cartile
     //// care au borrowedNumberOfBooks mai mic decat totalNumberOfBooks)
+       return getLibrary().isBookInList(ISBNCode);
+    }
 
-    public void viewAvailableBooks(Library library) {//aici pot returna lista de carti disponibila si sa ma folosesc in met borrowbook
-        for (int i = 0; i < library.getBooks().length; i++) {
-            if (library.getBooks()[i].getTotalNumberOfCopies() > library.getBooks()[i].getBorrowedNumberOfCopies()) {
-                System.out.println(library.getBooks()[i]);
-            }
+    public void viewAvailableBooks() {//aici pot returna lista de carti disponibila si sa ma folosesc in met borrowbook
+        Book[] books = getLibrary().getBooks();
+        for (int i = 0; i < getLibrary().getBooks().length; i++) {
+
         }
     }
 
@@ -62,7 +70,7 @@ public class Client extends User {
            for (int i = 0; i < library.getBooks().length; i++) {
                if (ISBNCode.equals(library.getBooks()[i].getISBNCode()) &&
                        (library.getBooks()[i].getTotalNumberOfCopies() > library.getBooks()[i].getBorrowedNumberOfCopies())) {
-                   borrowedBooksCode[noBorrowBooks++] = ISBNCode;
+                   borrowedBooksCode[noOfBorrowedBooks++] = ISBNCode;
                    //cum fac sa cresc numarul de carti imprumutate
                    //library.setBooks(library.getBooks().getBorrowedNumberOfCopies());
                    flag = 1;
@@ -86,12 +94,12 @@ public class Client extends User {
             if (ISBNCode.equals(library.getBooks()[i].getISBNCode())) {
                 //parcurg lista de carti imprumutate si daca codul primit ca parametru se gaseste in aceasta lista
                 //atunci suprascriu acel cod cu urmatoarele din lista si scad numarul de carti imprumutate
-                for (int j = 0; j < noBorrowBooks; j++) {
+                for (int j = 0; j < noOfBorrowedBooks; j++) {
                     if (ISBNCode.equals(borrowedBooksCode[j])) {
-                        for (int k = j; k < noBorrowBooks; k++) {
+                        for (int k = j; k < noOfBorrowedBooks; k++) {
                             borrowedBooksCode[j] = borrowedBooksCode[k + 1];
                         }
-                        noBorrowBooks--;
+                        noOfBorrowedBooks--;
                     }
                 }
                 //cum fac sa scad numarul de copii de carti imprumutate??

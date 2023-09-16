@@ -14,17 +14,15 @@
 
 public class Book {
     private String title;
-    private String autor;
+    private String author;
     private String ISBNCode;
     private int totalNumberOfCopies;
     private int borrowedNumberOfCopies;
 
     public Book(String title, String autor, String ISBNCode, int totalNumberOfCopies, int borrowedNumberOfCopies) {
         this.title = title;
-        this.autor = autor;
+        this.author = autor;
         this.ISBNCode = ISBNCode;
-        this.totalNumberOfCopies = totalNumberOfCopies;
-        this.borrowedNumberOfCopies = borrowedNumberOfCopies;
     }
 
     public String getTitle() {
@@ -35,12 +33,12 @@ public class Book {
         this.title = title;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setAuthor(String autor) {
+        this.author = autor;
     }
 
     public String getISBNCode() {
@@ -49,6 +47,9 @@ public class Book {
 
     public void setISBNCode(String ISBNCode) {
         this.ISBNCode = ISBNCode;
+    }
+    public boolean isAvailable() {
+        return totalNumberOfCopies > borrowedNumberOfCopies;
     }
 
     public int getTotalNumberOfCopies() {
@@ -71,7 +72,7 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "title='" + title + '\'' +
-                ", autor='" + autor + '\'' +
+                ", autor='" + author + '\'' +
                 ", ISBNCode='" + ISBNCode + '\'' +
                 ", totalNumberOfCopies=" + totalNumberOfCopies +
                 ", borrowedNumberOfCopies=" + borrowedNumberOfCopies +

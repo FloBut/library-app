@@ -6,10 +6,7 @@ public class Main {
         Book book2 = new Book("Title2", "Author2", "00002", 3, 1);
         Book book3 = new Book("Title3", "Author3", "00003", 6, 2);
         Book[] books = {book1, book2};
-        Admin admin = new Admin("John");
-        Library library = new Library(books);
-        admin.addBook(library, "00003");
-        System.out.println(library.toString());
-
+       Library library = new Library(20);
+       Admin admin = new Admin("John", library);
     }
 }
